@@ -1,0 +1,26 @@
+req.headers, params, query
+thers nothing such as req.body
+data comes in streams
+
+app.use(function( req, res, next ) {
+  var data = '';
+  req.on('data', function( chunk ) {
+    data += chunk;
+  });
+  req.on('end', function() {
+    req.rawBody = data;
+    console.log( 'on end: ', data )
+    if (data && data.indexOf('{') > -1 ) {
+      req.body = JSON.parse(data);
+    }
+    next();
+  });
+});
+
+
+
+res.send has by default the header content-type as text/html
+res.setHeader() to change header.
+res.redirect('/');
+app.listen internally creats the http server so we dont need to explicitly call http.createServer(app);
+__dirname provides us the absolute path of the root folder.
