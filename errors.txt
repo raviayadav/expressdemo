@@ -24,3 +24,45 @@ res.setHeader() to change header.
 res.redirect('/');
 app.listen internally creats the http server so we dont need to explicitly call http.createServer(app);
 __dirname provides us the absolute path of the root folder.
+
+
+
+Request and Response objects
+
+-> pretty huge objects with few important properties that are extensively used, others are rarely used.
+
+Req -> 3 primary way to receive data from the user -> query, params, body examples
+Exmaine the url.
+
+
+Res -> send, json, status, redirect, end
+headers -> append, 
+```js
+res.append('Content-Type', 'application/javascript; charset=UTF-8');
+res.append('Connection', 'keep-alive')
+```
+Type
+res.type('html') 
+sending files -> sendFile, download
+code changes to serve static files -> path, views, public
+```js
+app.get('/gallery/:fileName', function(req, res){
+  const file = `${__dirname}/public/${req.params.fileName}`;
+  res.download(file);
+});
+```
+
+
+Templating Engines
+Why?
+Options -> jade(pug), ejs, handlebar, haml etc. 
+code changes -> npm i express-handlebar, partials, layouts in views,
+
+
+Errors
+
+Types of errors -> operational -> technical errors(db server down) , db operations fail, programming errors-> bugs/logical errors
+
+try-catch, then-catch -> use express to handle error
+
+
